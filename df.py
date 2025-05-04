@@ -1,6 +1,4 @@
 import pandas as pd
-import plotly.express as px
-import streamlit as st
 
 df = pd.read_csv(
     "C:/Users/aaguirre/Documents/Alejandro Aguirre/Personal/Curso Python/TT_Sprint7/project_sprint7/vehicles_us.csv")
