@@ -1,7 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv(
-    "C:/Users/aaguirre/Documents/Alejandro Aguirre/Personal/Curso Python/TT_Sprint7/project_sprint7/vehicles_us.csv")
+df = pd.read_csv("vehicles_us.csv")
 
 # La columan Model year debería de ser tipo object y no float, los datos ausentes serán "unknown".
 
