@@ -71,11 +71,14 @@ st.image(images[indice],
 
 hist_button = st.button(
     'Puedes generar un histograma en base a el parámetro que desees')
-hist_var = st.button(
-    'selecciona por cual parámetro deseas generar el histograma')
-if hist_var:
-    st.write("Columnas disponibles:")
-    st.write(df.columns.tolist())
+hist_var = st.selectbox(
+    'Selecciona el parámetro para el histograma', "Precio, Año, Kilometraje")
+if hist_var == "Precio":
+    hist_var = "price"
+elif hist_var == "Año":
+    hist_var = "model_year"
+elif hist_var == "Kilometraje":
+    hist_var = "odometer"
 
 if hist_button:
     st.write(
