@@ -70,11 +70,12 @@ st.image(images[indice],
          caption=f"Modelo {indice + 1}", use_container_width=True)
 
 # Histograma y diagrama de dispersión
+
+hist_var = st.selectbox('Selecciona el parámetro para el histograma', [
+                        "Precio", "Año", "Kilometraje"])
 hist_button = st.button(
     'Puedes generar un histograma en base a el parámetro que desees')
 if hist_button:
-    hist_var = st.selectbox(
-        'Selecciona el parámetro para el histograma', ["Precio", "Año", "Kilometraje"])
     if hist_var == "Precio":
         hist_var = "price"
         fig = px.histogram(df, x=hist_var, labels={
