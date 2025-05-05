@@ -69,22 +69,24 @@ indice = st.slider(
 st.image(images[indice],
          caption=f"Modelo {indice + 1}", use_container_width=True)
 
+# Histograma y diagrama de dispersión
 hist_button = st.button(
     'Puedes generar un histograma en base a el parámetro que desees')
-hist_var = st.selectbox(
-    'Selecciona el parámetro para el histograma', "Precio, Año, Kilometraje")
-if hist_var == "Precio":
-    hist_var = "price"
-elif hist_var == "Año":
-    hist_var = "model_year"
-elif hist_var == "Kilometraje":
-    hist_var = "odometer"
-
 if hist_button:
-    st.write(
-        'Creación de un histograma para el conjunto de datos de anuncios de venta de coches')
-    fig = px.histogram(df, x=hist_var)
-    st.plotly_chart(fig, use_container_width=True)
+    hist_var = st.selectbox(
+        'Selecciona el parámetro para el histograma', ["Precio", "Año", "Kilometraje"])
+    if hist_var == "Precio":
+        hist_var = "price"
+        fig = px.histogram(df, x=hist_var)
+        st.plotly_chart(fig, use_container_width=True)
+    elif hist_var == "Año":
+        hist_var = "model_year"
+        fig = px.histogram(df, x=hist_var)
+        st.plotly_chart(fig, use_container_width=True)
+    elif hist_var == "Kilometraje":
+        hist_var = "odometer"
+        fig = px.histogram(df, x=hist_var)
+        st.plotly_chart(fig, use_container_width=True)
 
 scatter_button = st.button('Construye un diagrama de dispersión')
 if scatter_button:
