@@ -64,15 +64,23 @@ images = [
     "https://st2.stat.vin/files/1N4AL3APXEC409160/COPART/30265051/photo/4acfc87d-556a-40ac-9251-db29cd629f34.JPG",
     "https://i.ebayimg.com/thumbs/images/g/AN4AAOSwoxdnlXOk/s-l1200.jpg"]
 
-indice = st.slider("Estos son algunos de nuestros modelos disponibles")
+indice = st.slider(
+    "Estos son algunos de nuestros modelos disponibles", 0, len(images) - 1, 0)
 st.image(images[indice],
          caption=f"Modelo {indice + 1}", use_container_width=True)
 
-hist_button = st.button('Construye un histograma')
+hist_button = st.button(
+    'Puedes generar un histograma en base a el parámetro que desees')
+hist_var = st.button(
+    'selecciona por cual parámetro deseas generar el histograma')
+if hist_var:
+    st.write("Columnas disponibles:")
+    st.write(df.columns.tolist())
+
 if hist_button:
     st.write(
         'Creación de un histograma para el conjunto de datos de anuncios de venta de coches')
-    fig = px.histogram(df, x="odometer")
+    fig = px.histogram(df, x=hist_var)
     st.plotly_chart(fig, use_container_width=True)
 
 scatter_button = st.button('Construye un diagrama de dispersión')
@@ -80,3 +88,15 @@ if scatter_button:
     st.write('Creación de diagrama de dispersión para el conjunto de datos de anuncios de venta de coches')
     fig = px.scatter(df, x="odometer")
     st.plotly_chart(fig, use_container_width=True)
+
+# Contacto
+st.markdown("<p style='font-size:18px; text-align:justify;'>Ven a conocer tu auto.</p>",
+            unsafe_allow_html=True)
+with st.form("Agendar cita"):
+    nombre = st.text_input("Tu nombre")
+    correo = st.text_input("Tu correo")
+    mensaje = st.text_area("Mensaje al vendedor")
+    enviado = st.form_submit_button("Enviar")
+    if enviado:
+        st.success(
+            "Nosotros nos pondremos en contacto contigo pronto, muchas gracias por su preferencia.")
