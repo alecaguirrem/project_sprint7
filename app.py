@@ -128,16 +128,18 @@ if scatter_button:
         st.plotly_chart(fig, use_container_width=True)
     if var_1 == "Año - Condición":
         fig = px.scatter(df, x="model_year", y="condition",
-                         labels={"price": "Precio", "condition": "Condición"},
-                         title="Diagrama de dispersión entre Precio y Condición")
+                         labels={"model_year": "Año del Modelo",
+                                 "condition": "Condición"},
+                         title="Diagrama de dispersión entre Año del Modelo y Condición")
         for valor, etiqueta in legend_conditions.items():
             fig.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(
                 size=10), name=f"{valor} - {etiqueta}"))
         st.plotly_chart(fig, use_container_width=True)
-    if var_1 == "Precio - Condición":
-        fig = px.scatter(df, x="price", y="condition",
-                         labels={"price": "Precio", "condition": "Condición"},
-                         title="Diagrama de dispersión entre Precio y Condición")
+    if var_1 == "Kilometraje - Condición":
+        fig = px.scatter(df, x="odometer", y="condition",
+                         labels={"odometer": "Kilometraje",
+                                 "condition": "Condición"},
+                         title="Diagrama de dispersión entre Kilometraje y Condición")
         for valor, etiqueta in legend_conditions.items():
             fig.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(
                 size=10), name=f"{valor} - {etiqueta}"))
