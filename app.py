@@ -64,16 +64,16 @@ df["date_posted"] = pd.to_datetime(df["date_posted"])
 # Titulos y descripción de la web
 st.markdown("<p style='font-size:40px; text-align:center;'>Bienvenido a Auto Fácil 🚗.</p>",
             unsafe_allow_html=True)
-st.markdown("<p style='font-size:18px; text-align:justify;'>Hola, mi nombre es Alejandro Aguirre y soy el fundador de Auto Fácil ©. Aquí podrás encontrar entre muchos de nuestros autos en excelentes condiciones, tenemos autos nuevos, semi-nuevos y usados. Utiliza nuestro buscador para encontrar el mejor modelo para ti. Puedes agendar una cita de manejo para conocer el próximo auto de tus sueños.</p>", unsafe_allow_html=True)
+st.markdown("<p style='font-size:18px; text-align:justify;'>Hola, mi nombre es Alejandro Aguirre y soy el fundador de Auto Fácil ©. Aquí podrás encontrar entre muchos de nuestros autos en excelentes condiciones, tenemos autos nuevos, semi-nuevos y reparados. Utiliza nuestro buscador para encontrar el mejor modelo para ti. Puedes agendar una cita de manejo para conocer el próximo auto de tus sueños.</p>", unsafe_allow_html=True)
 
 # Slide de imágenes
 images = [
-    "https://static.cargurus.com/images/forsale/2025/04/04/04/05/2002_honda_civic-pic-2171495440266185037-1024x768.jpeg",
+    "https://i.pinimg.com/originals/7d/67/77/7d677755f926da011c6b2ef44ad92aaa.jpg",
     "https://i.ytimg.com/vi/e8SEyZHXb_g/maxresdefault.jpg",
     "https://dealerscloud.blob.core.windows.net/leesburgautoimport/1C3CCCAG1HN502472/800/1.jpg",
-    "https://static.cargurus.com/images/forsale/2025/04/24/19/28/2013_nissan_maxima-pic-8675347025972541598-1024x768.jpeg",
+    "https://i.ytimg.com/vi/BHUlqKkRfAQ/maxresdefault.jpg",
     "https://acnews.blob.core.windows.net/imgnews/large/0_30165525849.jpg",
-    "https://st2.stat.vin/files/1N4AL3APXEC409160/COPART/30265051/photo/4acfc87d-556a-40ac-9251-db29cd629f34.JPG",
+    "https://st2.stat.vin/files/1N4AL3APXEC409160/COPART/30265051/photo/4acfc87d-556a-40ac-9251-db29cd629f34.jpg",
     "https://i.ebayimg.com/thumbs/images/g/AN4AAOSwoxdnlXOk/s-l1200.jpg"]
 
 indice = st.slider(
