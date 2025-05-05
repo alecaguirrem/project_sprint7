@@ -56,7 +56,6 @@ st.markdown("<p style='font-size:40px; text-align:center;'>Bienvenido a Auto Fá
 st.markdown("<p style='font-size:18px; text-align:justify;'>Hola, mi nombre es Alejandro Aguirre y soy el fundador de Auto Fácil ©. Aquí podrás encontrar entre muchos de nuestros autos en excelentes condiciones, tenemos autos nuevos, semi-nuevos y usados. Utiliza nuestro buscador para encontrar el mejor modelo para ti. Puedes agendar una cita de manejo para conocer el próximo auto de tus sueños.</p>", unsafe_allow_html=True)
 
 # Slide de imágenes
-
 images = [
     "https://static.cargurus.com/images/forsale/2025/04/04/04/05/2002_honda_civic-pic-2171495440266185037-1024x768.jpeg",
     "https://i.ytimg.com/vi/e8SEyZHXb_g/maxresdefault.jpg",
@@ -80,3 +79,5 @@ if scatter_button:
     st.write('Creación de diagrama de dispersión para el conjunto de datos de anuncios de venta de coches')
     fig = px.scatter(df, x="odometer")
     st.plotly_chart(fig, use_container_width=True)
+
+print("hola")
