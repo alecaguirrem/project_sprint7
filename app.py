@@ -1,6 +1,7 @@
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+import plotly.graph_objects as go
 
 df = pd.read_csv("vehicles_us.csv")
 
@@ -45,8 +46,19 @@ df.loc[(df['type'].isin(four_wheels)) & (
     df['is_4wd'].isna()), 'is_4wd'] = "yes"
 df["is_4wd"] = df["is_4wd"].fillna("unknown")
 
+# Voy a cambiar la columna de condition a números para poder graficar.
+
+df["condition"] = df["condition"].replace("salvage", "1")
+df["condition"] = df["condition"].replace("fair", "3")
+df["condition"] = df["condition"].replace("good", "5")
+df["condition"] = df["condition"].replace("like new", "7")
+df["condition"] = df["condition"].replace("excellent", "9")
+df["condition"] = df["condition"].replace("new", "10")
+df["condition"] = df["condition"].astype(int)
+
 # La columna date_posted debería de ser tipo datetime y no object
 df["date_posted"] = pd.to_datetime(df["date_posted"])
+
 
 # Aplicación Web con Streamlit
 # Titulos y descripción de la web
@@ -70,33 +82,66 @@ st.image(images[indice],
          caption=f"Modelo {indice + 1}", use_container_width=True)
 
 # Histograma y diagrama de dispersión
-
-hist_var = st.selectbox('Selecciona el parámetro para el histograma', [
-                        "Precio", "Año", "Kilometraje"])
+var = st.selectbox('Selecciona el parámetro para el histograma', [
+    "Precio", "Año", "Kilometraje"])
 hist_button = st.button(
     'Puedes generar un histograma en base a el parámetro que desees')
 if hist_button:
-    if hist_var == "Precio":
-        hist_var = "price"
-        fig = px.histogram(df, x=hist_var, labels={
-                           hist_var: "Precio"}, title="Histograma de precios")
+    if var == "Precio":
+        var = "price"
+        fig = px.histogram(df, x=var, labels={
+                           var: "Precio"}, title="Histograma de precios")
         st.plotly_chart(fig, use_container_width=True)
-    if hist_var == "Año":
-        hist_var = "model_year"
-        fig = px.histogram(df, x=hist_var, labels={
-                           hist_var: "Año del modelo"}, title="Histograma de Años del modelo")
+    if var == "Año":
+        var = "model_year"
+        fig = px.histogram(df, x=var, labels={
+                           var: "Año del modelo"}, title="Histograma de Años del modelo")
         st.plotly_chart(fig, use_container_width=True)
-    if hist_var == "Kilometraje":
-        hist_var = "odometer"
-        fig = px.histogram(df, x=hist_var, labels={
-                           hist_var: "Kilometraje"}, title="Histograma de Kilometraje")
+    if var == "Kilometraje":
+        var = "odometer"
+        fig = px.histogram(df, x=var, labels={
+                           var: "Kilometraje"}, title="Histograma de Kilometraje")
         st.plotly_chart(fig, use_container_width=True)
+
+var_1 = st.selectbox('Selecciona los parámetros para la gráfica de dispersión (x,y)', [
+    "Precio - Condición", "Año - Condición", "Kilometraje - Condición"])
 
 scatter_button = st.button('Construye un diagrama de dispersión')
 if scatter_button:
-    st.write('Creación de diagrama de dispersión para el conjunto de datos de anuncios de venta de coches')
-    fig = px.scatter(df, x="odometer")
-    st.plotly_chart(fig, use_container_width=True)
+    legend_conditions = {
+        10: "Nuevo",
+        9: "Excelente",
+        7: "Como nuevo",
+        5: "Bueno",
+        3: "Regular",
+        1: "Reparado por accidente"
+    }
+
+    if var_1 == "Precio - Condición":
+        fig = px.scatter(df, x="price", y="condition",
+                         labels={"price": "Precio",
+                                 "condition": "Condición del carro"},
+                         title="Diagrama de dispersión entre Precio y Condición")
+        for valor, etiqueta in legend_conditions.items():
+            fig.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(
+                size=10), name=f"{valor} - {etiqueta}"))
+        st.plotly_chart(fig, use_container_width=True)
+    if var_1 == "Año - Condición":
+        fig = px.scatter(df, x="model_year", y="condition",
+                         labels={"price": "Precio", "condition": "Condición"},
+                         title="Diagrama de dispersión entre Precio y Condición")
+        for valor, etiqueta in legend_conditions.items():
+            fig.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(
+                size=10), name=f"{valor} - {etiqueta}"))
+        st.plotly_chart(fig, use_container_width=True)
+    if var_1 == "Precio - Condición":
+        fig = px.scatter(df, x="price", y="condition",
+                         labels={"price": "Precio", "condition": "Condición"},
+                         title="Diagrama de dispersión entre Precio y Condición")
+        for valor, etiqueta in legend_conditions.items():
+            fig.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(
+                size=10), name=f"{valor} - {etiqueta}"))
+        st.plotly_chart(fig, use_container_width=True)
 
 # Contacto
 st.markdown("<p style='font-size:18px; text-align:justify;'>Ven a conocer tu auto.</p>",
