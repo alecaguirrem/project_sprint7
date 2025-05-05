@@ -77,18 +77,18 @@ if hist_button:
         'Selecciona el parámetro para el histograma', ["Precio", "Año", "Kilometraje"])
     if hist_var == "Precio":
         hist_var = "price"
-        fig = px.histogram(df, x=hist_var, xlabel="Precio",
-                           title="Histograma de precios", bin_size=100)
+        fig = px.histogram(df, x=hist_var, labels={
+                           hist_var: "Precio"}, title="Histograma de precios", bin_size=100)
         st.plotly_chart(fig, use_container_width=True)
     if hist_var == "Año":
         hist_var = "model_year"
-        fig = px.histogram(df, x=hist_var, xlabel="Año del Modelo",
-                           title="Histograma de Años del modelo", bin_size=20)
+        fig = px.histogram(df, x=hist_var, labels={
+                           hist_var: "Año del modelo"}, title="Histograma de Años del modelo", bin_size=20)
         st.plotly_chart(fig, use_container_width=True)
     if hist_var == "Kilometraje":
         hist_var = "odometer"
-        fig = px.histogram(df, x=hist_var, xlabel="Kilometraje",
-                           title="Histograma de Kilometraje", bin_size=200)
+        fig = px.histogram(df, x=hist_var, labels={
+                           hist_var: "Kilometraje"}, title="Histograma de Kilometraje", bin_size=200)
         st.plotly_chart(fig, use_container_width=True)
 
 scatter_button = st.button('Construye un diagrama de dispersión')
