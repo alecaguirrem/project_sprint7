@@ -49,8 +49,7 @@ df["is_4wd"] = df["is_4wd"].fillna("unknown")
 df["date_posted"] = pd.to_datetime(df["date_posted"])
 
 # Aplicación Web con Streamlit
-# Tpitulos y descripción de la web
-st.header('Bienvenido a Auto Fácil 🚗.',)
+# Titulos y descripción de la web
 st.markdown("<p style='font-size:40px; text-align:center;'>Bienvenido a Auto Fácil 🚗.</p>",
             unsafe_allow_html=True)
 st.markdown("<p style='font-size:18px; text-align:justify;'>Hola, mi nombre es Alejandro Aguirre y soy el fundador de Auto Fácil ©. Aquí podrás encontrar entre muchos de nuestros autos en excelentes condiciones, tenemos autos nuevos, semi-nuevos y usados. Utiliza nuestro buscador para encontrar el mejor modelo para ti. Puedes agendar una cita de manejo para conocer el próximo auto de tus sueños.</p>", unsafe_allow_html=True)
@@ -62,10 +61,12 @@ images = [
     "https://dealerscloud.blob.core.windows.net/leesburgautoimport/1C3CCCAG1HN502472/800/1.jpg",
     "https://static.cargurus.com/images/forsale/2025/04/24/19/28/2013_nissan_maxima-pic-8675347025972541598-1024x768.jpeg",
     "https://acnews.blob.core.windows.net/imgnews/large/0_30165525849.jpg",
-]
+    "https://st2.stat.vin/files/1N4AL3APXEC409160/COPART/30265051/photo/4acfc87d-556a-40ac-9251-db29cd629f34.JPG",
+    "https://i.ebayimg.com/thumbs/images/g/AN4AAOSwoxdnlXOk/s-l1200.jpg"]
 
-indice = st.slider("Desliza para ver modelos", 0, len(images) - 1, 0)
-st.image(images[indice], caption=f"Modelo {indice + 1}", use_column_width=True)
+indice = st.slider("Estos son algunos de nuestros modelos disponibles")
+st.image(images[indice],
+         caption=f"Modelo {indice + 1}", use_container_width=True)
 
 hist_button = st.button('Construye un histograma')
 if hist_button:
@@ -79,5 +80,3 @@ if scatter_button:
     st.write('Creación de diagrama de dispersión para el conjunto de datos de anuncios de venta de coches')
     fig = px.scatter(df, x="odometer")
     st.plotly_chart(fig, use_container_width=True)
-
-print("hola")
